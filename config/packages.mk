@@ -69,11 +69,13 @@ PRODUCT_PACKAGES += \
     vendor.aospa.power-service
 
 # QTI VNDK Framework Detect
+ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
 PRODUCT_PACKAGES += \
     libvndfwk_detect_jni.qti \
     libqti_vndfwk_detect \
     libvndfwk_detect_jni.qti.vendor \
     libqti_vndfwk_detect.vendor
+endif
 
 # Shell
 PRODUCT_PACKAGES += \

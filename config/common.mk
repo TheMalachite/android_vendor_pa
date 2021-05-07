@@ -86,15 +86,22 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml \
     vendor/pa/config/permissions/pa-default-permissions.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/pa-default-permissions.xml \
     vendor/pa/config/permissions/privapp-permissions-aospa-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-aospa.xml \
-    vendor/pa/config/permissions/privapp-permissions-qti.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-qti.xml \
     vendor/pa/config/permissions/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-hotword.xml \
+
+# Permissions (QTI)
+ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
+PRODUCT_COPY_FILES += \
+    vendor/pa/config/permissions/privapp-permissions-qti.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-qti.xml \
     vendor/pa/config/permissions/qti_whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/qti_whitelist.xml
+endif
 
 # Pixel Features
 $(call inherit-product, vendor/google/pixel/config.mk)
 
 # Include Common Qualcomm Device Tree on Qualcomm Boards
+ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
 $(call inherit-product-if-exists, device/qcom/common/common.mk)
+endif
 
 # Init
 PRODUCT_PACKAGES += \

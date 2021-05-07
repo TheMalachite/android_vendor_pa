@@ -3,6 +3,7 @@ PRODUCT_COPY_FILES += \
     vendor/pa/prebuilt/etc/apns-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
 
 # HIDL Wrapper
+ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
 PRODUCT_PACKAGES += \
     qti-telephony-hidl-wrapper \
     qti_telephony_hidl_wrapper.xml
@@ -19,6 +20,7 @@ PRODUCT_BOOT_JARS += telephony-ext
 # Network and Internet Settings
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.sys.fflag.override.settings_network_and_internet_v2=true
+endif
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -27,9 +29,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.ims.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.ims.xml
 
 # QTI Telephony Utils
+ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
 PRODUCT_PACKAGES += \
     qti-telephony-utils \
     qti_telephony_utils.xml
+endif
 
 # Sensitive Phone Numbers list
 PRODUCT_COPY_FILES += \
@@ -40,8 +44,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.config.ringtone=Leaps_and_bounds.ogg
 
 # TCP Connection Management
+ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
 PRODUCT_PACKAGES += tcmiface
 PRODUCT_BOOT_JARS += tcmiface
+endif
 
 # Telephony packages
 PRODUCT_PACKAGES += \
